@@ -22,7 +22,6 @@ class bookController extends Controller
             'tahun_terbit' => 'required'
         ]);
 
-        // Blog::create($request->all());
         Book::create([
             'judul_buku' => $request->judul_buku,
             'penulis_buku' => $request->penulis_buku,
@@ -52,7 +51,12 @@ class bookController extends Controller
             'tahun_terbit' => 'required'
         ]);
 
-        Book::create($request->all());
+        Book::where('id', '=', $id)->update([
+            'judul_buku' => $request->judul_buku,
+            'penulis_buku' => $request->penulis_buku,
+            'jumlah_halaman_buku' => $request->jumlah_halaman,
+            'tahun_terbit_buku' => $request->tahun_terbit
+        ]);
         return redirect('/books')->with('status', 'Data Buku Berhasil Diubah');
     }
 
